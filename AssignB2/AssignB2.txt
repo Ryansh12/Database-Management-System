@@ -1,0 +1,68 @@
+./mongo 10.10.11.42/t3454db -u t3454 -p t3454
+
+ mongodb-linux-x86_64-3.0.4/bin/mongo 10.10.12.237/t3454db -u t3454 -p t3454
+
+
+
+
+CREATE
+db.createCollection("student");
+
+INSERT
+db.student.insert({roll: 1, name: 'kalyan', branch: 'comp'});
+WriteResult({ "nInserted" : 1 })
+> db.student.insert({roll: 2, name: 'shan', branch: 'IT'});
+WriteResult({ "nInserted" : 1 })
+> db.student.insert({roll: 3, name: 'chaitanya', branch: 'civil'});
+WriteResult({ "nInserted" : 1 })
+
+
+UPDATE
+db.student.update({ 'roll' : 2 },{$set:{ 'branch':'comp'}})
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+
+
+SHOW COLLECTION
+db.student.find()
+{ "_id" : ObjectId("5b7e8adfdb4471b66976ac76"), "roll" : 1, "name" : "kalyan", "branch" : "comp" }
+{ "_id" : ObjectId("5b7e8b12db4471b66976ac77"), "roll" : 2, "name" : "shan", "branch" : "comp" }
+{ "_id" : ObjectId("5b7e8b2cdb4471b66976ac78"), "roll" : 3, "name" : "chaitanya", "branch" : "civil" }
+
+DELETE DOCUMENT
+db.student.remove({'roll':1})
+WriteResult({ "nRemoved" : 2 })
+
+DELETE ALL DOCUMENT
+db.student.remove({})
+WriteResult({ "nRemoved" : 2 })
+
+DROP COLLECTION	
+db.student.drop()
+true
+
+
+SAVE METHOD
+db.student.save( {"_id" : ObjectId("5b7e8f06db4471b66976ac7a"),'roll' : 2,'branch' : 'IT'});
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.student.find()
+{ "_id" : ObjectId("5b7e8f06db4471b66976ac7a"), "roll" : 2, "branch" : "IT" }
+
+
+LOGICAL OPERATIONS
+OR
+db.student.find({$or:[{"branch":"Comp"},{"branch":"EnTC"}]});
+{ "_id" : ObjectId("5b8e5833602395eca99097e3"), "roll" : 3, "branch" : "Comp" }
+{ "_id" : ObjectId("5b8e5850602395eca99097e4"), "roll" : 5, "branch" : "EnTC" }
+
+
+AND
+ db.student.find({$and:[{"branch":"Comp"},{"roll":3}]});
+{ "_id" : ObjectId("5b8e5833602395eca99097e3"), "roll" : 3, "branch" : "Comp" }
+
+NOT
+db.student.find({"branch": {$not:{$eq:"EnTC"}}});
+{ "_id" : ObjectId("5b7e8f06db4471b66976ac7a"), "roll" : 2, "branch" : "IT" }
+{ "_id" : ObjectId("5b8e5833602395eca99097e3"), "roll" : 3, "branch" : "Comp" }
+
+
+

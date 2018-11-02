@@ -1,0 +1,5 @@
+create table Professors(prof_id int,prof_fname varchar(50),prof_lname varchar(50),dept_id int,designation varchar(50),salary int,doj date,email varchar(50),phone int,city varchar(50),primary key(prof_id),foreign key(dept_id) references Departments(dept_id) on delete cascade); 
+
+create table works(prof_id int,dept_id int,duration time default '08:00:00',foreign key(Prof_id) references Professors(Prof_id) on delete cascade,foreign key(dept_id) references Departments(dept_id) on delete cascade); 
+
+create table Shift(prof_id int,Shift varchar(50),working_hours varchar(60),foreign key(Prof_id) references Professors(Prof_id) on delete cascade); 

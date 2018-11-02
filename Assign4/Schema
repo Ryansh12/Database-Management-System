@@ -1,0 +1,16 @@
+Use the tables created in assignment no 2 and execute the following queries:
+1.	Find the professor details and department details using NATURAL JOIN.
+2.	Find the prof_id, prof_name and  shift. (INNER JOIN)
+3.	List all the department details and the corresponding names of professors in the same department.(left outer join)
+4.	List all the professors and the corresponding names of department.(right outer join)
+5.	Display professor name, dept_name, shift, salary where prof_id = 101;(multitable join)
+6.	list the total number of professor in each department.(count and any join,groupby)
+7.	List the prof_id associated department and the dept_name having name ‘computer’;(subquery)
+8.	Find the names of all departments where the professors joined in year 2015 (or date of joining is 1-1-2015).(subquery)
+9.	Create view showing the professor and shift details. (COMPLEX VIEW)
+10.	Perform Manipulation on simple view-Insert, update, delete, drop view.
+
+
+
+A4: Guidelines
+Natural Join, Inner Join/Equi Join, Left Outer Join, Right Outer Join, Count+Join, 2 queries on Subquery, complex view and manipulation on simple view must be covered.

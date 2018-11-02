@@ -1,0 +1,99 @@
+
+EXPLICIT PARAMETERIZED
+
+declare
+newcid number;
+newname varchar(20);
+oldcid number;
+oldname varchar(20);
+cursor newcursor(n int) is select * from new_emp where id=n;
+cursor oldcursor is select * from old_emp;
+begin
+open oldcursor;
+loop
+fetch oldcursor into oldcid,oldname;
+exit when oldcursor%notfound;
+open newcursor(oldcid);
+fetch newcursor into newcid,newname;
+if newcursor%notfound then
+insert into new_emp values(oldcid,oldname);         
+end if;
+close newcursor;
+end loop;
+close oldcursor;
+end;
+/
+
+
+SIMPLE
+
+CREATE PROCEDURE new1(IN rno1 int(3))
+BEGIN
+ If not exists (select * from N_rollcall where rno=rno1) then
+ insert into N_rollcall
+ select * from O_rollcall
+ where rno=rno1;
+ End If;
+ END
+
+
+IMPLICIT
+
+declare
+nm varchar(20);
+Id number; 
+cursor c1 is select * from old_emp;
+begin
+open c1;
+loop
+fetch c1 into Id,nm; 
+exit when c1%NOTFOUND;
+IF NOT b THEN
+SELECT old_emp.id,old_emp.name into Id,nm FROM new_emp,old_emp where old_emp.id = new_emp.id;
+END IF;
+IF sql%NOTFOUND THEN
+INSERT into new_emp(id,name) values(Id,nm);
+END IF;
+end loop;
+END;	
+/	
+
+
+
+IMPLICIT FOR LOOPED WORKING  -- works only when at least one entry in new_emp;
+
+begin
+for loop_emp in (SELECT old_emp.id,old_emp.name  FROM old_emp,new_emp where old_emp.id <> new_emp.id)
+loop
+dbms_output.put_line(loop_emp.id||'-'||loop_emp.name);
+INSERT into new_emp(id,name) values(loop_emp.id,loop_emp.name);
+end loop;
+END;	
+/
+
+
+
+
+EXPLICIT PARAMETERIZED FOR LOOPED CURSER
+
+declare
+newcid number;
+newname varchar(20);
+cursor newcursor(n int) is select id,name from new_emp where id=n;
+cursor oldcursor is select id,name from old_emp;
+begin
+for oldc in oldcursor
+loop
+open newcursor(oldc.id);       			
+fetch newcursor into newcid,newname;   
+if newcursor%notfound then
+insert into new_emp values(oldc.id,oldc.name);         
+end if;
+close newcursor;
+end loop;
+end;
+/
+
+
+
+

@@ -1,0 +1,36 @@
+
+//cursor
+//memory area
+
+
+TYPES
+
+IMPLICIT
+
+	opened,fetched and closed automatically
+	doesnt have any name
+
+	ATTRIBUTES
+
+		sql%open - always returns a false value , as the memory allocation and dealloaction is controlled by oracle, and cannot 					get the open status of cursor
+
+
+		//below three helps us to know the status of previously executed statement
+		sql%found- returns true if previous statement is executed successfully
+
+		sql%notfound - opposite to found
+
+		sql%rowcount - returns the no of rows affected by previously executed statement
+
+ 
+
+begin
+delete from emp where deptno=90;
+
+if(sql%found)then                 //here used implicit cursor attributes, it will return true only when delete statement deletes
+dbms_output.put_line('the no of records deleted are-' || sql%rowcount');
+else
+dbms_output.put_line('failed!!!');
+end if;
+end;
+/

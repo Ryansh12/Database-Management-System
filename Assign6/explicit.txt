@@ -1,0 +1,54 @@
+
+//explicit cursors
+
+//created by users for processing multiple records
+//implicit cursors doesnot have name associated with it, whereas explicit cursors do have name
+
+
+
+
+declare   //giving cursur name here
+
+open      //to open the cursor
+
+fetch     //acts as pointer to fetch the records from table(and records are fetched using loops)
+
+close     //to close the cursor
+
+
+ATTRIBUTES
+
+cur_name%open  -returns true if cursor is open else false
+
+cur_name%found - returns true if previous sql statement is executed successfully
+
+cur_name%notfound - opp. of found
+
+cur_name%rowcount - returns the no. of record fetched in above query
+
+
+
+
+declare
+	cursor cur_emp
+	is
+	select ename,sal from emp where deptno=&deptnumb;  //&deptnumb is keyboard entered value
+
+	vnm emp.ename%type;  //declared variable vnm whose datatype is same as datatype of ename in emp table
+	vsal emp.sal%type;
+begin
+	open cur_emp;   //open the cursor(as its an explicit cursor)
+	loop
+	    	fetch cur_emp into vnm,vsal;            //vnm & vsal are holders for data being fetched from cursor
+		exit when cur_emp%notfound;             // loop should end only when the records are not found(empty) i.e after last
+		dbms_output.put_line(vnm||'-'||vsal);   
+		dbms_output.put_line(cur_emp%rowcount);
+	end loop;
+close cur_emp;
+end;
+/
+
+
+
+
+

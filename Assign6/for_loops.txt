@@ -1,0 +1,43 @@
+
+
+//cursors using for loop
+
+//for loops are faster than simple loops
+
+declare
+	cursor cur_name
+	is
+	select ename, sal from emp where deptno=&num;
+begin
+	for vrec in cur_name                  //here vrec is not declare in declare section, so by default for loop will declare it(thereby 							opening and fetching and closing the cursor automatically)
+	loop
+		dbms_output.put_line(vrec.ename||' '||vrec.sal);
+		exit when cur_name%rowcount=0;
+	end loop;
+	--dbms_output.put_line(cur_name%rowcount);
+end;
+/
+
+
+declare
+newcid number;
+newname varchar(20);
+oldcid number;
+oldname varchar(20);
+cursor newcursor(n int) is select * from new_emp where id=n;
+cursor oldcursor is select * from old_emp;
+begin
+open oldcursor;
+loop
+fetch oldcursor into oldcid,oldname;
+exit when oldcursor%notfound;
+open newcursor(oldcid);
+fetch newcursor into newcid,newname;
+if newcursor%notfound then
+insert into new_emp values(oldcid,oldname);         
+end if;
+close newcursor;
+end loop;
+close oldcursor;
+end;
+/

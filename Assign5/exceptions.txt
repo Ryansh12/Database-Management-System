@@ -1,0 +1,28 @@
+
+//Exceptions 
+
+oracle 
+ 2 types of error
+  
+1) compile time error - syntax,priveledges - change in code
+2) run time error - data problem or business logic problem - may or may not reqire code change
+
+
+syntax of error
+
+ORA-[ERROR CODE] - MESSAGE
+
+eg: 
+ORA-00942: table or view doesnt exist
+
+
+//why exception handling 
+//mainly the runtime errors are called as exceptions
+//so whenever the exceptions occur the program will stop executing and control will  automatically come out of program
+//i.e if some uncomitted DML(insert,delete,update) operation would have happened and exception occurs and the control will com out and whatever DML operation has done will rollback
+
+
+TYPES OF EXCEPTION
+pre-defined
+user-defined
+

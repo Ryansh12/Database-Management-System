@@ -1,0 +1,27 @@
+
+//PRE-DEFINED EXCEPTIONS
+
+	NO_DATA_FOUND - 01403
+	TOO_MANY_ROWS - 01422
+	INVALID_CURSOR - 01001
+	CURSOR_ALREADY_OPEN - 06511
+	ZERO_DIVIDE - 01476
+
+	OTHERS- generic handler which can handle any errors  
+	
+
+declare
+	vno number:=&empno;
+	vnm varchar(20);
+begin
+	select ename into vnm from emp where empno=vno;
+	dbms_output.put_line(vnm);
+	
+	exception
+	when NO_DATA_FOUND then
+		dbms_output.put_line('employee not found');
+	when others then
+		dbms_output.put_line('this is a other exception');
+	
+end;
+/

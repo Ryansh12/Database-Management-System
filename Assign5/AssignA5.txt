@@ -1,0 +1,39 @@
+
+create table Customer(Cust_id int,Name varchar(20), DateofPayment date, NameofScheme varchar(20), Status varchar(20));
+insert into Customer values(1,'Kaustubh Phatak', '18-SEP-2018', 'abc','N');
+
+
+create table Fine(Cust_id int, CurDate date, Amt int);
+
+
+
+
+declare
+id int:=&customer_id;
+ns varchar2(20):='&name_of_scheme';
+i_date date;
+curdate date;
+diff int;
+fine_amt int;
+begin
+select DateofPayment into i_date from Customer where Cust_id=id;
+SELECT trunc(sysdate - i_date) into diff from dual;
+If (diff>=15 and diff<=30) then
+fine_amt:=diff*5;
+insert into Fine values(id,trunc(sysdate),fine_amt);
+elsif (diff>30) then
+fine_amt:=diff*50;
+insert into Fine values(id,trunc(sysdate),fine_amt);
+End if;
+Update Customer set status='P' where Cust_id=id;
+exception
+when no_data_found then
+dbms_output.put_line('No such record exist');
+End;
+/
+
+
+
+
+
+

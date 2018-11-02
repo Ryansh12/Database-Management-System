@@ -1,0 +1,11 @@
+Use the tables created in assignment no 2 and execute the following queries:
+1.	Insert atleast 10 records in professors table and insert other tables accordingly.
+2.	Display all professors details with city pune and mumbai and professor first name starting with 'a' or 'd'.
+3.	list the number of different cities of professors.(use of distinct)
+4.	Give 5% increase in salary of the professors with date of joining 1-1-2015. ( use of update)
+5.	Delete professor details living in pune.
+6.	Find the names of professors belonging to pune or mumbai(use of UNION)
+7.	Find the professors who joined on date 1-1-2015 as well as in 1-1-2016 (use of INTERSECT)
+8.	Find the professor having maximum salary and names of professors having salary between 10,000 and 20,000. (use of  max and between)
+9.	Display all professors name with salary and date of joining with decreasing order of salary.
+10.	Display professors name, date of joining and dept_id with salary 30000, 40000 and 50000 (use of IN).

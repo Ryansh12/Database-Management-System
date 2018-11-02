@@ -1,0 +1,10 @@
+Unnamed PL/SQL code block: Use of Control structure and Exception handling is mandatory.
+Write a PL/SQL block of code for the following requirements:-
+Schema:
+Customer(Cust_id,Name, DateofPayment, NameofScheme, Status)
+Fine(Cust_id, Date, Amt)
+1.	Accept Cust_id & name of scheme from user.
+2.	Check the number of days (from date of payment), if days are between 15 to 30 then fine amount will be Rs 5per day.
+3.	If no. of days>30, per day fine will be Rs 50 per day & for days less than 30, Rs. 5 per  day.
+4.	After payment, status will change from N to P.
+5.	If condition of fine is true, then details will be stored into Fine table.

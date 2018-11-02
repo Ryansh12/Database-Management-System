@@ -1,0 +1,167 @@
+ASSIGNMENT 3
+
+Q1)
+
+
+insert into Professors values 
+(1,"Siddharth","Joshi",2,"Assit. Prof",10000,"2000-02-01","sid@gmail.com", 86428525,"Pune"),(2,"Shantanu","Shroff",1,"HOD",900000,"2015-01-01","shan@gmail.com",587468464,"Pune"),(3,"Sai","Kalyan",3,"Prof.",30000,"2016-01-01","kalyan@gmail.com",654644544,"Pune"),(4,"Sai","Chaitanya",10,"Prof",32000,"2010-01-09","sai@gmail.com", 85575787,"Mumbai"),
+(5,"Arav","Jain",4,"Assit. Prof",15000,"2015-01-01","arav@gmail.com", 832568525,"Pune"),(6,"Abhi","Sharma",6,"Prof.",40000,"1999-07-05","abhi@gmail.com",583532464,"Mumbai"),(7,"Amit","Mishra",5,"Prof.",50000,"2007-05-03","amit@gmail.com",6546554544,"Pune"),(8,"Rutik","More",7,"Prof",800000,"2017-05-06","rutik@gmail.com", 5656512312,"Pune"), 
+(9,"Amitadov","Ghosh",8,"Assit. Prof",20000,"2011-02-01","amitdov@gmail.com", 832656625,"Indore"), (10,"Harshid","Nanda",9,"Prof.",900000,"1984-07-06","nanda@gmail.com",58356364,"Pune");
+
+
+insert into  works values 
+(1,2,"08:00:00"),
+(2,1,"09:00:00"),
+(3,3,"08:00:00"),
+(4,10,"08:00:00"),
+(5,4,"08:00:00"),
+(6,6,"08:00:00"),
+(7,5,"10:00:00"),
+(8,7,"08:00:00"),
+(9,8,"08:00:00"),
+(10,9,"08:00:00"); 
+
+
+
+insert into  Shift values
+(1,"1st","8:00-15:00"),
+(2,"2nd","13:00-20:00"),
+(3,"1st","8:00-15:00"),
+(4,"1st","8:00-15:00"),
+(5,"2nd","13:00-20:00"), 
+(1,"1st","8:00-15:00"),
+(2,"2nd","13:00-20:00"),
+(3,"1st","8:00-15:00"),
+(4,"1st","8:00-15:00"),
+(5,"2nd","13:00-20:00"); 
+
+
+
+
+
+Q2)
+Select prof_fname,prof_lname from Professors where city IN("Pune","Mumbai") and prof_fname like 'a%' or 'd%'; 
++------------+------------+
+| prof_fname | prof_lname |
++------------+------------+
+| Arav       | Jain       |
+| Abhi       | Sharma     |
+| Amit       | Mishra     |
++------------+------------+
+
+
+Q3)
+Select count(DISTINCT city) from Professors; 
++----------------------+
+| count(DISTINCT city) |
++----------------------+
+|                    3 |
++----------------------+
+
+Q4)
+update Professors set salary =( Professors.salary*0.05+Professors.salary) where doj="2015-01-01";
+
+select * from Professors;
++---------+------------+------------+---------+-------------+--------+------------+-------------------+------------+--------+
+| prof_id | prof_fname | prof_lname | dept_id | designation | salary | doj        | email             | phone      | city   |
++---------+------------+------------+---------+-------------+--------+------------+-------------------+------------+--------+
+|       1 | Siddharth  | Joshi      |       2 | Assit. Prof |  10000 | 2000-02-01 | sid@gmail.com     |   86428525 | Pune   |
+|       2 | Shantanu   | Shroff     |       1 | HOD         | 945000 | 2015-01-01 | shan@gmail.com    |  587468464 | Pune   |
+|       3 | Sai        | Kalyan     |       3 | Prof.       |  30000 | 2016-01-01 | kalyan@gmail.com  |  654644544 | Pune   |
+|       4 | Sai        | Chaitanya  |      10 | Prof        |  32000 | 2010-01-09 | sai@gmail.com     |   85575787 | Mumbai |
+|       5 | Arav       | Jain       |       4 | Assit. Prof |  15750 | 2015-01-01 | arav@gmail.com    |  832568525 | Pune   |
+|       6 | Abhi       | Sharma     |       6 | Prof.       |  40000 | 1999-07-05 | abhi@gmail.com    |  583532464 | Mumbai |
+|       7 | Amit       | Mishra     |       5 | Prof.       |  50000 | 2007-05-03 | amit@gmail.com    | 2147483647 | Pune   |
+|       8 | Rutik      | More       |       7 | Prof        | 800000 | 2017-05-06 | rutik@gmail.com   | 2147483647 | Pune   |
+|       9 | Amitadov   | Ghosh      |       8 | Assit. Prof |  20000 | 2011-02-01 | amitdov@gmail.com |  832656625 | Indore |
+|      10 | Harshid    | Nanda      |       9 | Prof.       | 900000 | 1984-07-06 | nanda@gmail.com   |   58356364 | Pune   |
++---------+------------+------------+---------+-------------+--------+------------+-------------------+------------+--------+
+Q5)
+select * from Professors where city = "Pune";//DELETE QUERY HERE
++---------+------------+------------+---------+-------------+--------+------------+------------------+------------+------+
+| prof_id | prof_fname | prof_lname | dept_id | designation | salary | doj        | email            | phone      | city |
++---------+------------+------------+---------+-------------+--------+------------+------------------+------------+------+
+|       1 | Siddharth  | Joshi      |       2 | Assit. Prof |  10000 | 2000-02-01 | sid@gmail.com    |   86428525 | Pune |
+|       2 | Shantanu   | Shroff     |       1 | HOD         | 945000 | 2015-01-01 | shan@gmail.com   |  587468464 | Pune |
+|       3 | Sai        | Kalyan     |       3 | Prof.       |  30000 | 2016-01-01 | kalyan@gmail.com |  654644544 | Pune |
+|       5 | Arav       | Jain       |       4 | Assit. Prof |  15750 | 2015-01-01 | arav@gmail.com   |  832568525 | Pune |
+|       7 | Amit       | Mishra     |       5 | Prof.       |  50000 | 2007-05-03 | amit@gmail.com   | 2147483647 | Pune |
+|       8 | Rutik      | More       |       7 | Prof        | 800000 | 2017-05-06 | rutik@gmail.com  | 2147483647 | Pune |
+|      10 | Harshid    | Nanda      |       9 | Prof.       | 900000 | 1984-07-06 | nanda@gmail.com  |   58356364 | Pune |
++---------+------------+------------+---------+-------------+--------+------------+------------------+------------+------+
+
+
+Q6)
+select Prof_fname,Prof_lname from Professors where city="Pune" UNION select Prof_fname,Prof_lname from Professors where city="Mumbai";
++------------+------------+
+| Prof_fname | Prof_lname |
++------------+------------+
+| Siddharth  | Joshi      |
+| Shantanu   | Shroff     |
+| Sai        | Kalyan     |
+| Arav       | Jain       |
+| Amit       | Mishra     |
+| Rutik      | More       |
+| Harshid    | Nanda      |
+| Sai        | Chaitanya  |
+| Abhi       | Sharma     |
++------------+------------+
+
+Q7)
+select Prof_fname,Prof_lname from Professors where doj="2016-01-01" UNION select Prof_fname,Prof_lname from Professors where doj="2015-01-01";
+//INTERSECT CANNOT BE USED HERE
++------------+------------+
+| Prof_fname | Prof_lname |
++------------+------------+
+| Sai        | Kalyan     |
+| Shantanu   | Shroff     |
+| Arav       | Jain       |
++------------+------------+
+
+Q8)
+select prof_fname,prof_lname,salary from Professors where salary in (select MAX(salary) from Professors);
++------------+------------+--------+
+| prof_fname | prof_lname | salary |
++------------+------------+--------+
+| Shantanu   | Shroff     | 945000 |
++------------+------------+--------+
+
+
+select prof_fname,prof_lname,salary from Professors where salary between 10000 and 20000;
++------------+------------+--------+
+| prof_fname | prof_lname | salary |
++------------+------------+--------+
+| Siddharth  | Joshi      |  10000 |
+| Arav       | Jain       |  15750 |
+| Amitadov   | Ghosh      |  20000 |
++------------+------------+--------+
+
+Q9)
+select prof_fname,prof_lname,salary,doj from Professors order by salary desc;
++------------+------------+--------+------------+
+| prof_fname | prof_lname | salary | doj        |
++------------+------------+--------+------------+
+| Shantanu   | Shroff     | 945000 | 2015-01-01 |
+| Harshid    | Nanda      | 900000 | 1984-07-06 |
+| Rutik      | More       | 800000 | 2017-05-06 |
+| Amit       | Mishra     |  50000 | 2007-05-03 |
+| Abhi       | Sharma     |  40000 | 1999-07-05 |
+| Sai        | Chaitanya  |  32000 | 2010-01-09 |
+| Sai        | Kalyan     |  30000 | 2016-01-01 |
+| Amitadov   | Ghosh      |  20000 | 2011-02-01 |
+| Arav       | Jain       |  15750 | 2015-01-01 |
+| Siddharth  | Joshi      |  10000 | 2000-02-01 |
++------------+------------+--------+------------+
+
+Q10)
+select prof_fname,prof_lname,doj,dept_id,salary from Professors where salary in(30000,40000,50000);
++------------+------------+------------+---------+--------+
+| prof_fname | prof_lname | doj        | dept_id | salary |
++------------+------------+------------+---------+--------+
+| Sai        | Kalyan     | 2016-01-01 |       3 |  30000 |
+| Abhi       | Sharma     | 1999-07-05 |       6 |  40000 |
+| Amit       | Mishra     | 2007-05-03 |       5 |  50000 |
++------------+------------+------------+---------+--------+
+
+
+

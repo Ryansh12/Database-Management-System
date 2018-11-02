@@ -1,0 +1,320 @@
+
+
+	
+	Assignment  A4
+																												
+Query 1 :
+
+MySQL [t3454db]> select * from Professors natural join Departments ;
++---------+---------+------------+------------+-------------+--------+------------+-------------------------+------------+----------+-----------+
+| dept_id | prof_id | prof_fname | prof_lname | designation | salary | doj        | email                   | phone      | city     | dept_name |
++---------+---------+------------+------------+-------------+--------+------------+-------------------------+------------+----------+-----------+
+|     101 |     101 | Kaushal    | Sapkal     | Prof.       |  60000 | 02/07/2011 | ks27@gmail.com          | 9526378406 | Kolhapur | Comp      |
+|     101 |     105 | Akash      | Kumar      | Asst. Prof  |  30000 | 25/03/2018 | kumars@gmail.com        | 8380346487 | Pune     | Comp      |
+|     101 |     108 | Rushikesh  | Kulkarni   | Prof.       |  60000 | 15/9/2014  | rushi@gmail.com         | 7245039826 | Pune     | Comp      |
+|     101 |     110 | Ashish     | Gaikwad    | Asst. Prof  |  45000 | 1/7/2012   | gaikwadashish@gmail.com | 9463215703 | Nashik   | Comp      |
+|     201 |     102 | Dinesh     | Paul       | Prof.       |  55000 | 09/01/2015 | dinpaul@gmail.com       | 9524893406 | Pune     | IT        |
+|     201 |     106 | Bhaskar    | Raut       | Asst. Prof  |  30000 | 2/11/2017  | braut211@gmail.com      | 9254835611 | Mumbai   | IT        |
+|     201 |     111 | Sanket     | Patil      | Prof.       |  40000 | 21/9/2017  | sanket21@gmail.com      | 7972423096 | Nagpur   | IT        |
+|     301 |     103 | Rajesh     | Sharma     | Prof.       |  52500 | 1/1/2015   | rajma@gmail.com         | 9523607106 | Mumbai   | E&TC      |
+|     301 |     104 | Rakesh     | Shetty     | Asst. Prof  |  40000 | 21/09/2017 | rakesh21@gmail.com      | 9480342637 | Nagpur   | E&TC      |
+|     301 |     109 | Jayesh     | Patil      | Prof.       |  65000 | 5/6/2010   | jay56@gmail.com         | 7915703641 | Mumbai   | E&TC      |
++---------+---------+------------+------------+-------------+--------+------------+-------------------------+------------+----------+-----------+
+10 rows in set (0.00 sec)
+
+															
+
+Query 2 :
+
+MySQL [t3454db]> select p.prof_id,prof_fname,prof_lname,shift from Professors p inner join Shift s where p.prof_id = s.prof_id ;
++---------+------------+------------+-----------+
+| prof_id | prof_fname | prof_lname | shift     |
++---------+------------+------------+-----------+
+|     101 | Kaushal    | Sapkal     | Morning   |
+|     102 | Dinesh     | Paul       | Morning   |
+|     103 | Rajesh     | Sharma     | Morning   |
+|     104 | Rakesh     | Shetty     | Morning   |
+|     105 | Akash      | Kumar      | Morning   |
+|     106 | Bhaskar    | Raut       | Afternoon |
+|     108 | Rushikesh  | Kulkarni   | Afternoon |
+|     109 | Jayesh     | Patil      | Afternoon |
+|     110 | Ashish     | Gaikwad    | Afternoon |
+|     111 | Sanket     | Patil      | Morning   |
++---------+------------+------------+-----------+
+10 rows in set (0.00 sec)
+
+														
+
+Query 3 :
+
+MySQL [t3454db]> select d.dept_id,dept_name,prof_fname,prof_lname from Departments d left join Professors p on d.dept_id = p.dept_id ;
++---------+-----------+------------+------------+
+| dept_id | dept_name | prof_fname | prof_lname |
++---------+-----------+------------+------------+
+|     101 | Comp      | Kaushal    | Sapkal     |
+|     101 | Comp      | Akash      | Kumar      |
+|     101 | Comp      | Rushikesh  | Kulkarni   |
+|     101 | Comp      | Ashish     | Gaikwad    |
+|     201 | IT        | Dinesh     | Paul       |
+|     201 | IT        | Bhaskar    | Raut       |
+|     201 | IT        | Sanket     | Patil      |
+|     301 | E&TC      | Rajesh     | Sharma     |
+|     301 | E&TC      | Rakesh     | Shetty     |
+|     301 | E&TC      | Jayesh     | Patil      |
++---------+-----------+------------+------------+
+10 rows in set (0.00 sec)
+
+														
+															
+Query 4 :
+
+MySQL [t3454db]> select prof_fname,prof_lname,dept_name from Professors p right join Departments d on d.dept_id = p.dept_id;
++------------+------------+-----------+
+| prof_fname | prof_lname | dept_name |
++------------+------------+-----------+
+| Kaushal    | Sapkal     | Comp      |
+| Akash      | Kumar      | Comp      |
+| Rushikesh  | Kulkarni   | Comp      |
+| Ashish     | Gaikwad    | Comp      |
+| Dinesh     | Paul       | IT        |
+| Bhaskar    | Raut       | IT        |
+| Sanket     | Patil      | IT        |
+| Rajesh     | Sharma     | E&TC      |
+| Rakesh     | Shetty     | E&TC      |
+| Jayesh     | Patil      | E&TC      |
++------------+------------+-----------+
+10 rows in set (0.00 sec)
+
+															
+															
+Query 5 :
+
+MySQL [t3454db]> select prof_fname,prof_lname,dept_name,shift,salary from Professors p,Shift s,Departments d where p.prof_id = s.prof_id and d.dept_id = p.dept_id and p.prof_id = 101 ;
++------------+------------+-----------+---------+--------+
+| prof_fname | prof_lname | dept_name | shift   | salary |
++------------+------------+-----------+---------+--------+
+| Kaushal    | Sapkal     | Comp      | Morning |  60000 |
++------------+------------+-----------+---------+--------+
+1 row in set (0.00 sec)
+
+															
+															
+Query 6 :
+
+MySQL [t3454db]> select dept_name,count(prof_id) from Departments d,Professors p where d.dept_id = p.dept_id group by dept_name ;
++-----------+----------------+
+| dept_name | count(prof_id) |
++-----------+----------------+
+| Comp      |              4 |
+| E&TC      |              3 |
+| IT        |              3 |
++-----------+----------------+
+3 rows in set (0.00 sec)
+
+													
+
+Query 7 :
+
+MySQL [t3454db]> select prof_id,dept_name from Professors p,Departments d where d.dept_id = p.dept_id and dept_name = "Comp" ;
++---------+-----------+
+| prof_id | dept_name |
++---------+-----------+
+|     101 | Comp      |
+|     105 | Comp      |
+|     108 | Comp      |
+|     110 | Comp      |
++---------+-----------+
+4 rows in set (0.00 sec)
+
+													
+															
+Query 8 :
+
+MySQL [t3454db]> select dept_name from Departments d,Professors p where d.dept_id = p.dept_id and doj like "%2015" ;
++-----------+
+| dept_name |
++-----------+
+| IT        |
+| E&TC      |
++-----------+
+2 rows in set (0.00 sec)
+															
+
+Query 9 :
+
+MySQL [t3454db]> create view prof_shift as select * from Professors natural join Shift ;
+Query OK, 0 rows affected (0.04 sec)
+
+
+MySQL [t3454db]> select * from prof_shift ;
++---------+------------+------------+---------+-------------+--------+------------+-------------------------+------------+----------+-----------+---------------+
+| prof_id | prof_fname | prof_lname | dept_id | designation | salary | doj        | email                   | phone      | city     | shift     | working_hours |
++---------+------------+------------+---------+-------------+--------+------------+-------------------------+------------+----------+-----------+---------------+
+|     101 | Kaushal    | Sapkal     |     101 | Prof.       |  60000 | 02/07/2011 | ks27@gmail.com          | 9526378406 | Kolhapur | Morning   | 7hrs. 30mins. |
+|     102 | Dinesh     | Paul       |     201 | Prof.       |  55000 | 09/01/2015 | dinpaul@gmail.com       | 9524893406 | Pune     | Morning   | 7hrs. 30mins. |
+|     103 | Rajesh     | Sharma     |     301 | Prof.       |  52500 | 1/1/2015   | rajma@gmail.com         | 9523607106 | Mumbai   | Morning   | 7hrs. 30mins. |
+|     104 | Rakesh     | Shetty     |     301 | Asst. Prof  |  40000 | 21/09/2017 | rakesh21@gmail.com      | 9480342637 | Nagpur   | Morning   | 8hrs. 30mins. |
+|     105 | Akash      | Kumar      |     101 | Asst. Prof  |  30000 | 25/03/2018 | kumars@gmail.com        | 8380346487 | Pune     | Morning   | 8hrs. 30mins. |
+|     106 | Bhaskar    | Raut       |     201 | Asst. Prof  |  30000 | 2/11/2017  | braut211@gmail.com      | 9254835611 | Mumbai   | Afternoon | 8hrs. 30mins. |
+|     108 | Rushikesh  | Kulkarni   |     101 | Prof.       |  60000 | 15/9/2014  | rushi@gmail.com         | 7245039826 | Pune     | Afternoon | 7hrs. 30mins. |
+|     109 | Jayesh     | Patil      |     301 | Prof.       |  65000 | 5/6/2010   | jay56@gmail.com         | 7915703641 | Mumbai   | Afternoon | 7hrs. 30mins. |
+|     110 | Ashish     | Gaikwad    |     101 | Asst. Prof  |  45000 | 1/7/2012   | gaikwadashish@gmail.com | 9463215703 | Nashik   | Afternoon | 8hrs. 30mins. |
+|     111 | Sanket     | Patil      |     201 | Prof.       |  40000 | 21/9/2017  | sanket21@gmail.com      | 7972423096 | Nagpur   | Morning   | 7hrs. 30mins. |
++---------+------------+------------+---------+-------------+--------+------------+-------------------------+------------+----------+-----------+---------------+
+10 rows in set (0.00 sec)
+								
+													
+															
+Query 10 :
+
+1 : Create
+
+MySQL [t3454db]> create view simple_view as select * from Professors ;
+Query OK, 0 rows affected (0.04 sec)
+
+MySQL [t3454db]> select * from simple_view ;
++---------+------------+------------+---------+-------------+--------+------------+-------------------------+------------+----------+
+| prof_id | prof_fname | prof_lname | dept_id | designation | salary | doj        | email                   | phone      | city     |
++---------+------------+------------+---------+-------------+--------+------------+-------------------------+------------+----------+
+|     101 | Kaushal    | Sapkal     |     101 | Prof.       |  60000 | 02/07/2011 | ks27@gmail.com          | 9526378406 | Kolhapur |
+|     102 | Dinesh     | Paul       |     201 | Prof.       |  55000 | 09/01/2015 | dinpaul@gmail.com       | 9524893406 | Pune     |
+|     103 | Rajesh     | Sharma     |     301 | Prof.       |  52500 | 1/1/2015   | rajma@gmail.com         | 9523607106 | Mumbai   |
+|     104 | Rakesh     | Shetty     |     301 | Asst. Prof  |  40000 | 21/09/2017 | rakesh21@gmail.com      | 9480342637 | Nagpur   |
+|     105 | Akash      | Kumar      |     101 | Asst. Prof  |  30000 | 25/03/2018 | kumars@gmail.com        | 8380346487 | Pune     |
+|     106 | Bhaskar    | Raut       |     201 | Asst. Prof  |  30000 | 2/11/2017  | braut211@gmail.com      | 9254835611 | Mumbai   |
+|     108 | Rushikesh  | Kulkarni   |     101 | Prof.       |  60000 | 15/9/2014  | rushi@gmail.com         | 7245039826 | Pune     |
+|     109 | Jayesh     | Patil      |     301 | Prof.       |  65000 | 5/6/2010   | jay56@gmail.com         | 7915703641 | Mumbai   |
+|     110 | Ashish     | Gaikwad    |     101 | Asst. Prof  |  45000 | 1/7/2012   | gaikwadashish@gmail.com | 9463215703 | Nashik   |
+|     111 | Sanket     | Patil      |     201 | Prof.       |  40000 | 21/9/2017  | sanket21@gmail.com      | 7972423096 | Nagpur   |
++---------+------------+------------+---------+-------------+--------+------------+-------------------------+------------+----------+
+10 rows in set (0.00 sec)
+
+MySQL [t3454db]> insert into simple_view values(112,"Saurabh","Patil",301,"Prof.",50000,"10/10/2010","spatil@gmail.com","9652134704","Nashik") ;
+Query OK, 1 row affected (0.05 sec)
+
+2 : Update
+
+MySQL [t3454db]> update simple_view set salary = 550000 ;
+Query OK, 11 rows affected (0.03 sec)
+Rows matched: 11  Changed: 11  Warnings: 0
+
+MySQL [t3452db]> select * from simple_view ;
++---------+------------+------------+---------+-------------+--------+------------+-------------------------+------------+----------+
+| prof_id | prof_fname | prof_lname | dept_id | designation | salary | doj        | email                   | phone      | city     |
++---------+------------+------------+---------+-------------+--------+------------+-------------------------+------------+----------+
+|     101 | Kaushal    | Sapkal     |     101 | Prof.       | 550000 | 02/07/2011 | ks27@gmail.com          | 9526378406 | Kolhapur |
+|     102 | Dinesh     | Paul       |     201 | Prof.       | 550000 | 09/01/2015 | dinpaul@gmail.com       | 9524893406 | Pune     |
+|     103 | Rajesh     | Sharma     |     301 | Prof.       | 550000 | 1/1/2015   | rajma@gmail.com         | 9523607106 | Mumbai   |
+|     104 | Rakesh     | Shetty     |     301 | Asst. Prof  | 550000 | 21/09/2017 | rakesh21@gmail.com      | 9480342637 | Nagpur   |
+|     105 | Akash      | Kumar      |     101 | Asst. Prof  | 550000 | 25/03/2018 | kumars@gmail.com        | 8380346487 | Pune     |
+|     106 | Bhaskar    | Raut       |     201 | Asst. Prof  | 550000 | 2/11/2017  | braut211@gmail.com      | 9254835611 | Mumbai   |
+|     108 | Rushikesh  | Kulkarni   |     101 | Prof.       | 550000 | 15/9/2014  | rushi@gmail.com         | 7245039826 | Pune     |
+|     109 | Jayesh     | Patil      |     301 | Prof.       | 550000 | 5/6/2010   | jay56@gmail.com         | 7915703641 | Mumbai   |
+|     110 | Ashish     | Gaikwad    |     101 | Asst. Prof  | 550000 | 1/7/2012   | gaikwadashish@gmail.com | 9463215703 | Nashik   |
+|     111 | Sanket     | Patil      |     201 | Prof.       | 550000 | 21/9/2017  | sanket21@gmail.com      | 7972423096 | Nagpur   |
+|     112 | Saurabh    | Patil      |     301 | Prof.       | 550000 | 10/10/2010 | spatil@gmail.com        | 9652134704 | Nashik   |
++---------+------------+------------+---------+-------------+--------+------------+-------------------------+------------+----------+
+11 rows in set (0.00 sec)
+
+3 : Delete
+
+MySQL [t3454db]> delete from simple_view where prof_id = 112 ; 
+Query OK, 1 row affected (0.04 sec)
+
+MySQL [t3454db]> select * from simple_view ;
++---------+------------+------------+---------+-------------+--------+------------+-------------------------+------------+----------+
+| prof_id | prof_fname | prof_lname | dept_id | designation | salary | doj        | email                   | phone      | city     |
++---------+------------+------------+---------+-------------+--------+------------+-------------------------+------------+----------+
+|     101 | Kaushal    | Sapkal     |     101 | Prof.       | 550000 | 02/07/2011 | ks27@gmail.com          | 9526378406 | Kolhapur |
+|     102 | Dinesh     | Paul       |     201 | Prof.       | 550000 | 09/01/2015 | dinpaul@gmail.com       | 9524893406 | Pune     |
+|     103 | Rajesh     | Sharma     |     301 | Prof.       | 550000 | 1/1/2015   | rajma@gmail.com         | 9523607106 | Mumbai   |
+|     104 | Rakesh     | Shetty     |     301 | Asst. Prof  | 550000 | 21/09/2017 | rakesh21@gmail.com      | 9480342637 | Nagpur   |
+|     105 | Akash      | Kumar      |     101 | Asst. Prof  | 550000 | 25/03/2018 | kumars@gmail.com        | 8380346487 | Pune     |
+|     106 | Bhaskar    | Raut       |     201 | Asst. Prof  | 550000 | 2/11/2017  | braut211@gmail.com      | 9254835611 | Mumbai   |
+|     108 | Rushikesh  | Kulkarni   |     101 | Prof.       | 550000 | 15/9/2014  | rushi@gmail.com         | 7245039826 | Pune     |
+|     109 | Jayesh     | Patil      |     301 | Prof.       | 550000 | 5/6/2010   | jay56@gmail.com         | 7915703641 | Mumbai   |
+|     110 | Ashish     | Gaikwad    |     101 | Asst. Prof  | 550000 | 1/7/2012   | gaikwadashish@gmail.com | 9463215703 | Nashik   |
+|     111 | Sanket     | Patil      |     201 | Prof.       | 550000 | 21/9/2017  | sanket21@gmail.com      | 7972423096 | Nagpur   |
++---------+------------+------------+---------+-------------+--------+------------+-------------------------+------------+----------+
+10 rows in set (0.00 sec)
+
+4 : Drop
+
+MySQL [t3454db]> drop view simple_view ;
+Query OK, 0 rows affected (0.00 sec)
+
+													
+															
+Stored Procedure :
+
+MySQL [t3454db]> Delimiter $$
+MySQL [t3454db]> create procedure str_proc_exmp()
+    -> begin
+    -> select * from Departments ;
+    -> select * from Professors ;
+    -> select * from Shift ;
+    -> select * from works ;
+    -> end
+    -> $$
+Query OK, 0 rows affected (0.00 sec)
+
+MySQL [t3454db]> delimiter ;
+MySQL [t3454db]> call str_proc_exmp() ;
++---------+-----------+
+| dept_id | dept_name |
++---------+-----------+
+|     101 | Comp      |
+|     201 | IT        |
+|     301 | E&TC      |
++---------+-----------+
+3 rows in set (0.00 sec)
+
++---------+------------+------------+---------+-------------+--------+------------+-------------------------+------------+----------+
+| prof_id | prof_fname | prof_lname | dept_id | designation | salary | doj        | email                   | phone      | city     |
++---------+------------+------------+---------+-------------+--------+------------+-------------------------+------------+----------+
+|     101 | Kaushal    | Sapkal     |     101 | Prof.       | 550000 | 02/07/2011 | ks27@gmail.com          | 9526378406 | Kolhapur |
+|     102 | Dinesh     | Paul       |     201 | Prof.       | 550000 | 09/01/2015 | dinpaul@gmail.com       | 9524893406 | Pune     |
+|     103 | Rajesh     | Sharma     |     301 | Prof.       | 550000 | 1/1/2015   | rajma@gmail.com         | 9523607106 | Mumbai   |
+|     104 | Rakesh     | Shetty     |     301 | Asst. Prof  | 550000 | 21/09/2017 | rakesh21@gmail.com      | 9480342637 | Nagpur   |
+|     105 | Akash      | Kumar      |     101 | Asst. Prof  | 550000 | 25/03/2018 | kumars@gmail.com        | 8380346487 | Pune     |
+|     106 | Bhaskar    | Raut       |     201 | Asst. Prof  | 550000 | 2/11/2017  | braut211@gmail.com      | 9254835611 | Mumbai   |
+|     108 | Rushikesh  | Kulkarni   |     101 | Prof.       | 550000 | 15/9/2014  | rushi@gmail.com         | 7245039826 | Pune     |
+|     109 | Jayesh     | Patil      |     301 | Prof.       | 550000 | 5/6/2010   | jay56@gmail.com         | 7915703641 | Mumbai   |
+|     110 | Ashish     | Gaikwad    |     101 | Asst. Prof  | 550000 | 1/7/2012   | gaikwadashish@gmail.com | 9463215703 | Nashik   |
+|     111 | Sanket     | Patil      |     201 | Prof.       | 550000 | 21/9/2017  | sanket21@gmail.com      | 7972423096 | Nagpur   |
++---------+------------+------------+---------+-------------+--------+------------+-------------------------+------------+----------+
+10 rows in set (0.00 sec)
+
++---------+-----------+---------------+
+| prof_id | shift     | working_hours |
++---------+-----------+---------------+
+|     101 | Morning   | 7hrs. 30mins. |
+|     102 | Morning   | 7hrs. 30mins. |
+|     103 | Morning   | 7hrs. 30mins. |
+|     104 | Morning   | 8hrs. 30mins. |
+|     105 | Morning   | 8hrs. 30mins. |
+|     106 | Afternoon | 8hrs. 30mins. |
+|     108 | Afternoon | 7hrs. 30mins. |
+|     109 | Afternoon | 7hrs. 30mins. |
+|     110 | Afternoon | 8hrs. 30mins. |
+|     111 | Morning   | 7hrs. 30mins. |
++---------+-----------+---------------+
+10 rows in set (0.00 sec)
+
++---------+---------+---------------+
+| prof_id | dept_id | duration      |
++---------+---------+---------------+
+|     101 |     101 | 8:00 - 15:30  |
+|     102 |     201 | 8:00 - 15:30  |
+|     103 |     301 | 8:00 - 15:30  |
+|     104 |     301 | 7:30 - 16:00  |
+|     105 |     101 | 7:30 - 16:00  |
+|     106 |     201 | 12:00 - 20:30 |
+|     108 |     101 | 12:30 - 20:00 |
+|     109 |     301 | 12:30 - 20:00 |
+|     110 |     101 | 12:00 - 20:30 |
+|     111 |     201 | 8:00 - 15:30  |
++---------+---------+---------------+
+10 rows in set (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)

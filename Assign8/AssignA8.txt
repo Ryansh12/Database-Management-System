@@ -1,0 +1,10 @@
+
+DELIMITER //
+create trigger trig1 after delete on student FOR EACH row begin INSERT into alumni(Rollno,Name ,branch) values(OLD.Rollno, old.Name ,old.branch ); 
+end; //
+delimiter ;
+
+delimiter //
+create trigger trig2 before update on student for each row begin if new.percent >100 then set new.percent = 100; end if; if new.Percent <0 then set new.Percent = 0; end if; 
+end; //
+delimiter ;

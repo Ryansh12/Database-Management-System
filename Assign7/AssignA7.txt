@@ -1,0 +1,69 @@
+insert into Customer7 values(1,'Shantanu Shroff', 15000);
+
+insert into Customer7 values(2,'Harshid Nanda', 7000);
+
+insert into Customer7 values(3,'Sai Kalyan', 3000);
+
+insert into Customer7 values(4,'Sanyam Malik', 1500);
+
+insert into Customer7 values(5,'Ryansh', 25000);
+
+
+
+
+CREATE OR REPLACE PROCEDURE try
+is
+cursor ccust is select * from Customer7;
+BEGIN
+for customer in ccust
+loop
+insert into Category values(customer.customer_id,customer.name,assign_level(customer.total_purchase));
+end loop;
+end;
+/
+
+
+FUNCTION DEFINITION
+
+create or replace function assign_level(purchase IN int) return varchar
+is
+clas varchar(20);
+BEGIN 
+if (purchase >= 10000 and purchase <= 20000) then
+clas:='PLATINUM';
+elsif (purchase >= 5000 and purchase <= 9999) then
+clas:='GOLD';
+elsif (purchase >= 2000 and purchase <= 4999) then
+clas:='SILVER';
+else
+clas:='OTHERS';
+end if;
+return (clas);
+END;
+/
+
+
+
+
+////////////////OPTIONAL//////////////////
+
+CREATE OR REPLACE PROCEDURE try
+is
+cursor ccust is select * from Customer7;
+BEGIN
+for customer in ccust
+loop
+IF (customer.total_purchase>=10000 AND customer.total_purchase<=20000) THEN 
+insert into Category values(customer.customer_id,customer.name,assign_level(customer.total_purchase));
+END IF;	
+IF (customer.total_purchase>=5000 AND customer.total_purchase<10000) THEN 
+insert into Category values(customer.customer_id,customer.name,assign_level(customer.total_purchase));
+END IF;
+IF (customer.total_purchase>=2000 AND customer.total_purchase<5000) THEN 
+insert into Category values(customer.customer_id,customer.name,assign_level(customer.total_purchase));
+END IF;
+end loop;
+END;
+/
+
+

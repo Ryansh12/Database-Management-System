@@ -1,0 +1,7 @@
+//FUNCTIONS
+
+reusable 
+returns one value by default
+'out' parameter--multiple values 
+return null--if nothing to return
+

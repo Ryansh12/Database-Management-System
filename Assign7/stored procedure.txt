@@ -1,0 +1,15 @@
+//STORED PROCEDURE
+
+may or may not return value
+reusabble
+
+exexuted stored procedure-> stored in db --> as psuedocode or machine code
+
+parameters
+IN-->by default --> from user(keyboard)-->READ ONLY(Cannot be modified inStore procedure)
+
+OUT-->value taken from stored procedure--> to calling program-->and modified inside stored procedure-->multiple out parameters are allowed
+
+INOUT-->combinition
+
+
